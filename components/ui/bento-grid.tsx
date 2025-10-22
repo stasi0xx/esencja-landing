@@ -1,5 +1,14 @@
+'use client';
+
 import { cn } from "@/lib/utils";
 import { BackgroundGradientAnimation } from "@/components/ui/background-gradient-animation";
+import {Globe} from "@/components/ui/globe";
+import {GlobeDemo} from "@/components/ui/GridGlobe";
+import Lottie from "react-lottie";
+import {useState} from "react";
+import animationData from '@/data/confetti.json';
+import MagicButton from "@/components/ui/MagicButton";
+import {IoCopyOutline} from "react-icons/io5";
 
 export const BentoGrid = ({
                               className,
@@ -39,74 +48,136 @@ export const BentoGridItem = ({
     titleClassName?: string;
     spareImg?: string;
 }) => {
+    const [copied, setCopied] = useState(false);
+
+    const handleCopy = () => {
+        navigator.clipboard.writeText('stanislaw.korycki.w@gmail.com');
+        setCopied(true);
+    }
+
     return (
         <div
             className={cn(
-                // ważne: relative + overflow-hidden, żeby obraz nie wychodził poza kafelek
-                "group/bento relative overflow-hidden shadow-input row-span-1 flex flex-col justify-between space-y-4 rounded-3xl border border-neutral-200 p-4 transition duration-200 hover:shadow-xl dark:border-white/[0.2] dark:shadow-none bg-gradient-to-r from-[#e6e6e6] to-white",
-                className,
+                // remove p-4 rounded-3xl dark:bg-black dark:border-white/[0.2] bg-white  border border-transparent, add border border-white/[0.1] overflow-hidden relative
+                "row-span-1 relative overflow-hidden rounded-3xl border border-white/[0.1] group/bento hover:shadow-xl transition duration-200 shadow-input dark:shadow-none justify-between flex flex-col space-y-4",
+                className
             )}
-        >
-            {/* Warstwa tła z głównym obrazem */}
-            {img && (
-                <div className="pointer-events-none absolute inset-0 z-0">
-                    <img
-                        src={img}
-                        alt="tile-background"
-                        loading="lazy"
-                        decoding="async"
-                        className={cn(
-                            // UWAGA: bez przecinków między klasami
-                            "h-full w-full object-cover object-center select-none",
-                            imgClassName,
-                        )}
-                    />
-                </div>
-            )}
+            style={{
+                //   add these two
+                //   you can generate the color from here https://cssgradient.io/
 
-            {/* Dodatkowa grafika (np. dekor or symbol), trzymana nad tłem, ale pod treścią */}
-            {spareImg && (
+                background: "linear-gradient(90deg,rgba(255, 255, 255, 1) 0%, rgba(235, 235, 235, 1) 79%, rgba(230, 230, 230, 1) 97%)",
+            }}
+        >
+            {/* add img divs */}
+            <div className={`${id === 6 && "flex justify-center"} h-full`}>
+                <div className="w-full h-full absolute">
+                    {img && (
+                        <img
+                            src={img}
+                            alt={img}
+                            className={cn(imgClassName, "object-cover object-center ")}
+                        />
+                    )}
+                </div>
+                <div
+                    className={`absolute right-0 -bottom-5 ${id === 5 && "w-full opacity-80"
+                    } `}
+                >
+                    {spareImg && (
+                        <img
+                            src={spareImg}
+                            alt={spareImg}
+                            //   width={220}
+                            className="object-cover object-center w-full h-full"
+                        />
+                    )}
+                </div>
+                {id === 6 && (
+                    // add background animation , remove the p tag
+                    <BackgroundGradientAnimation
+                        gradientBackgroundStart = "rgb(70, 70, 70)"
+                    gradientBackgroundEnd = "rgb(245, 245, 245)"
+
+                    // ciemniejsze, wyraźniejsze „plamy”
+                    firstColor = "60, 60, 60"
+                    secondColor = "110, 110, 110"
+                    thirdColor = "210, 210, 210"
+                    fourthColor = "30, 30, 30"
+                    fifthColor = "160, 160, 160"
+                    pointerColor = "230, 230, 230"
+
+                    blendingValue="multiply"
+
+
+                    >
+                        <div className="absolute z-50 inset-0 flex items-center justify-center text-white font-bold px-4 pointer-events-none text-3xl text-center md:text-4xl lg:text-7xl"></div>
+                    </BackgroundGradientAnimation>
+                )}
+
                 <div
                     className={cn(
-                        "pointer-events-none absolute right-0 bottom-0 z-[1]",
-                        id === 5 && "w-full opacity-80",
+                        titleClassName,
+                        "group-hover/bento:translate-x-2 transition duration-200 relative md:h-full min-h-40 flex flex-col px-5 p-5 lg:p-10"
                     )}
                 >
-                    <img
-                        src={spareImg}
-                        alt="tile-decoration"
-                        loading="lazy"
-                        decoding="async"
-                        className="object-contain"
-                    />
-                </div>
-            )}
+                    {/* change the order of the title and des, font-extralight, remove text-xs text-neutral-600 dark:text-neutral-300 , change the text-color */}
+                    <div className="font-sans font-extralight md:max-w-32 md:text-xs lg:text-base text-sm text-[#C1C2D3] z-10">
+                        {description}
+                    </div>
+                    {/* add text-3xl max-w-96 , remove text-neutral-600 dark:text-neutral-300*/}
+                    {/* remove mb-2 mt-2 */}
+                    <div
+                        className={`font-sans text-lg lg:text-xl max-w-96 font-bold z-10`}
+                    >
+                        {title}
+                    </div>
 
-            {/* Specjalne tło animowane dla id === 6 */}
-            {id === 6 && (
-                <BackgroundGradientAnimation>
-                    <div className="absolute inset-0 z-[1]" />
-                </BackgroundGradientAnimation>
-            )}
+                {id===2 && <GlobeDemo />}
+                {id===3 && (
+                    <div className={'flex gap-1 lg:gap-4 w-fit absolute -right-3 lg:-right-2'}>
+                        <div className={'flex flex-col gap-3 lg:gap-3'}>
+                            {['Reklamy', 'Strony WWW', 'Druk'].map((item) => (
+                                <span key={item} className="py-2 lg:py-4 lg:px-3 px-3 text-xs lg:text-base opacity-50 lg:opacity-100 rounded-lg text-center bg-[#A8A8A8] text-white">
+                                    {item}
+                                </span>
+                            ))}
+                            <span className="py-4 px-3 rounded-lg text-center bg-[#A8A8a8]"/>
+                        </div>
+                        <div className={'flex flex-col gap-3 lg:gap-3'}>
+                            <span className="py-4 px-3 rounded-lg text-center bg-[#A8A8a8]"/>
+                            {['Projekty graficzne', 'Imprezy firmowe', 'Budowa Marki'].map((item) => (
+                                <span key={item} className="py-2 lg:py-4 lg:px-3 px-3 text-xs lg:text-base opacity-50 lg:opacity-100 rounded-lg text-center bg-[#A8A8A8] text-white">
+                                    {item}
+                                </span>
+                            ))}
 
-            {/* Delikatny overlay poprawiający czytelność tekstu na jasnych obrazach */}
-            <div className="pointer-events-none absolute inset-0 z-[1] bg-gradient-to-t from-black/5 to-transparent" />
-
-            {/* Treść kafelka nad obrazami */}
-            <div
-                className={cn(
-                    titleClassName,
-                    "relative z-10 group-hover/bento:translate-x-2 transition duration-200 md:h-full min-h-40 flex flex-col px-5 p-5 lg:p-10",
-                    id === 6 && "flex justify-center",
+                        </div>
+                    </div>
                 )}
-            >
-                <div className="font-sans text-xs font-normal text-neutral-700 dark:text-neutral-300">
-                    {description}
-                </div>
-                <div className="mt-2 mb-2 font-sans font-bold text-neutral-800 dark:text-neutral-200">
-                    {title}
+                    {id === 6 && (
+                        <div className={"mt-5 relative"}>
+                            <div className={`absolute -bottom-5 right-0`}>
+                                <Lottie options={{
+                                    loop: copied,
+                                    autoplay: copied,
+                                    animationData,
+                                    rendererSettings: {preserveAspectRatio: 'xMidYMid slice',}
+                                }} />
+                            </div>
+                            <MagicButton
+                                title={copied ? 'Skopiowano!' : 'Skopiuj email!'}
+                                icon={<IoCopyOutline/>}
+                                position={'left'}
+                                otherClasses={'!bg-[#A8A8A8] text-white'}
+                                handleClick={handleCopy}
+                            />
+                        </div>
+                    )}
+
                 </div>
             </div>
         </div>
+
     );
 };
