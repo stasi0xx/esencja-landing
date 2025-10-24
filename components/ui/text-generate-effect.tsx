@@ -8,8 +8,10 @@ export const TextGenerateEffect = ({
   className,
   filter = true,
   duration = 0.5,
+  numberOf=0,
 }: {
   words: string;
+  numberOf?: number;
   className?: string;
   filter?: boolean;
   duration?: number;
@@ -37,7 +39,7 @@ export const TextGenerateEffect = ({
           return (
             <motion.span
               key={word + idx}
-              className={`${idx > 6 ? 'bg-gradient-to-b from-neutral-200 to-black text-white' : 'dark:text-white text-black'} opacity-0`}
+              className={`${idx > numberOf ? 'bg-gradient-to-b from-neutral-200 to-black text-white' : 'dark:text-white text-black'} opacity-0`}
               style={{
                 filter: filter ? "blur(10px)" : "none",
               }}

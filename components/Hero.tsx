@@ -26,7 +26,7 @@ const Hero = () => {
                     <h2 className={'uppercase tracking-widest text-xs text-center text-black-100 max-w-80'}>
                         Przenieś swoje reklamy na nowy poziom
                     </h2>
-                    <TextGenerateEffect className={'text-center text-[40px] md:text-5xl lg:text-6xl'} words={`Bądź w centrum uwagi przez cały rok. Zbuduj nieśmiertelny markę.`} />
+                    <TextGenerateEffect numberOf={6} className={'text-center text-[40px] md:text-5xl lg:text-6xl'} words={`Bądź w centrum uwagi przez cały rok. Zbuduj nieśmiertelny markę.`} />
                     <p className={'text-center md:tracking-wider mb-2 text-sm md:text-lg lg:text-2xl mt-2.5'}>Esencja | Kreator Reklam</p>
 
                     <a href={'#about'}>
