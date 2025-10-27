@@ -193,7 +193,7 @@ html {
     html { font-size: 120%; }
 }
 @media (min-width: 768px) {
-    html { font-size: 112.5%; } /* 18px */
+    html { font-size: 100%; } /* 18px */
 }
 @media (min-width: 1024px) {
     html { font-size: 120%; }   /* 19.2px */

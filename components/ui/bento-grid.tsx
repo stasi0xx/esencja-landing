@@ -9,6 +9,7 @@ import {useState} from "react";
 import animationData from '@/data/confetti.json';
 import MagicButton from "@/components/ui/MagicButton";
 import {IoCopyOutline} from "react-icons/io5";
+import DottedGlowBackground from "@/components/ui/dotted-glow-background";
 
 export const BentoGrid = ({
                               className,
@@ -122,7 +123,7 @@ export const BentoGridItem = ({
                     )}
                 >
                     {/* change the order of the title and des, font-extralight, remove text-xs text-neutral-600 dark:text-neutral-300 , change the text-color */}
-                    <div className="font-sans font-extralight md:max-w-32 md:text-xs lg:text-base text-sm text-[#C1C2D3] z-10">
+                    <div className="font-sans font-extralight md:max-w-32 md:text-xs lg:text-base text-sm text-dark-100 z-10">
                         {description}
                     </div>
                     {/* add text-3xl max-w-96 , remove text-neutral-600 dark:text-neutral-300*/}
@@ -135,7 +136,7 @@ export const BentoGridItem = ({
 
                 {id===2 && <GlobeDemo />}
                 {id===3 && (
-                    <div className={'flex gap-1 lg:gap-4 w-fit absolute -right-3 lg:-right-2'}>
+                    <div className={'flex gap-1 lg:gap-4 w-fit absolute -right-3 lg:-right-2 opacity-50'}>
                         <div className={'flex flex-col gap-3 lg:gap-3'}>
                             {['Reklamy', 'Strony WWW', 'Druk'].map((item) => (
                                 <span key={item} className="py-2 lg:py-4 lg:px-3 px-3 text-xs lg:text-base opacity-50 lg:opacity-100 rounded-lg text-center bg-[#A8A8A8] text-white">
@@ -155,6 +156,25 @@ export const BentoGridItem = ({
                         </div>
                     </div>
                 )}
+                    {id===4 && (
+                        <div className={className}>
+                            <DottedGlowBackground
+                                className="pointer-events-none mask-radial-to-90% mask-radial-at-center opacity-20 dark:opacity-100"
+                                opacity={1}
+                                gap={10}
+                                radius={1.6}
+                                colorLightVar="--color-neutral-500"
+                                glowColorLightVar="--color-neutral-600"
+                                colorDarkVar="--color-neutral-500"
+                                glowColorDarkVar="--color-sky-800"
+                                backgroundOpacity={0}
+                                speedMin={0.3}
+                                speedMax={1.6}
+                                speedScale={1}
+                            />
+                        </div>
+
+                    )}
                     {id === 6 && (
                         <div className={"mt-5 relative"}>
                             <div className={`absolute -bottom-5 right-0`}>
