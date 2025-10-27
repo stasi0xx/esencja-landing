@@ -2,6 +2,7 @@ import React from 'react'
 import {TextGenerateEffect} from "@/components/ui/text-generate-effect";
 import {workExperience} from "@/data";
 import {Button} from "@/components/ui/moving-border";
+import Image from "next/image";
 
 const Experience = () => {
     return (

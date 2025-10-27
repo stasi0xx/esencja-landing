@@ -2,6 +2,7 @@ import React from 'react'
 import {TextGenerateEffect} from "@/components/ui/text-generate-effect";
 import {InfiniteMovingCards} from "@/components/ui/infinite-moving-cards";
 import {companies, testimonials} from "@/data";
+import Image from "next/image";
 
 const Clients = () => {
     return (

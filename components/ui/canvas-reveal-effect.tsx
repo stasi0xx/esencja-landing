@@ -193,7 +193,7 @@ const ShaderMaterial = ({
 }) => {
     const { size } = useThree();
     // @ts-ignore
-    const ref = useRef<THREE.Mesh>();
+    const ref = useRef<THREE.Mesh<THREE.PlaneGeometry, THREE.ShaderMaterial> | null>(null);
     let lastFrameTime = 0;
 
     useFrame(({ clock }) => {

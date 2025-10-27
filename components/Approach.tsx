@@ -17,9 +17,8 @@ const useIsTouchDevice = () => {
             return () => mq.removeEventListener("change", update);
         } else {
             // starsze przeglądarki
-            // @ts-ignore
+
             mq.addListener(update);
-            // @ts-ignore
             return () => mq.removeListener(update);
         }
     }, []);

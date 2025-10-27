@@ -3,6 +3,7 @@ import {TextGenerateEffect} from "@/components/ui/text-generate-effect";
 import {projects} from "@/data";
 import {PinContainer} from "@/components/ui/3d-pin";
 import {FaLocationArrow} from "react-icons/fa6";
+import Image from "next/image";
 
 const RecentProjects = () => {
     return (
