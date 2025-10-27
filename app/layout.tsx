@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Esencja | Agencja Marketingowa",
+  title: "Esencja | Kreatorzy reklam",
   description: "Profesjonalna agencja marketingowa, która wyniesie Twój biznes na wyższy poziom.",
 };
 
